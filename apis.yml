@@ -1,0 +1,45 @@
+aid: fivetran
+name: Fivetran
+description: >-
+  Fivetran is an automated data integration platform providing pre-built
+  connectors for syncing data from SaaS, databases, and APIs into data
+  warehouses.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Unified API
+  - Data Integration
+  - ETL
+  - Connectors
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/fivetran/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: fivetran:fivetran
+    name: Fivetran
+    description: >-
+      Fivetran is an automated data integration platform providing pre-built
+      connectors for syncing data from SaaS, databases, and APIs into data
+      warehouses.
+    humanURL: https://www.fivetran.com/
+    tags:
+      - Unified API
+      - Data Integration
+      - ETL
+    properties:
+      - type: Documentation
+        url: https://fivetran.com/docs
+      - type: Getting Started
+        url: https://fivetran.com/docs/getting-started
+common:
+  - type: Website
+    url: https://www.fivetran.com/
+  - type: Documentation
+    url: https://fivetran.com/docs
+  - type: GitHub Organization
+    url: https://github.com/fivetran
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
