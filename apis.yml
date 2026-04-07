@@ -7,10 +7,10 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Unified API
+  - Connectors
   - Data Integration
   - ETL
-  - Connectors
+  - Unified API
 url: >-
   https://raw.githubusercontent.com/api-evangelist/fivetran/refs/heads/main/apis.yml
 created: '2026-03-27'
@@ -25,9 +25,9 @@ apis:
       warehouses.
     humanURL: https://www.fivetran.com/
     tags:
-      - Unified API
       - Data Integration
       - ETL
+      - Unified API
     properties:
       - type: Documentation
         url: https://fivetran.com/docs
