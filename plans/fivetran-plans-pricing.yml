@@ -1,0 +1,132 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Fivetran
+providerId: fivetran
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Data Integration
+  - ELT
+  - ETL
+description: Fivetran consumption-based pricing using Monthly Active Rows (MAR).
+sources:
+  - https://www.fivetran.com/pricing
+plans:
+  - id: fivetran-free
+    name: Free
+    type: freemium
+    description: Low-volume usage included.
+    entries:
+      - label: MAR
+        name: mar
+        type: quota
+        metric: row
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Limited usage
+      - name: Connectors limited
+  - id: fivetran-connections
+    name: Connections (Paid)
+    type: usage-based
+    description: $5 base for 1 MAR – 1M MAR; tiered above.
+    entries:
+      - label: Base (1-1M MAR)
+        name: base
+        type: metered
+        metric: MAR
+        limit: 1000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '5.00'
+        userMultiplied: false
+      - label: Higher tiers
+        name: tiers
+        type: metered
+        metric: MAR
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: tiered (declining)
+        userMultiplied: false
+    elements:
+      - name: Pay only for active rows
+      - name: Annual contracts save up to 22%
+  - id: fivetran-transformations
+    name: Transformations
+    type: usage-based
+    description: Tiered per model run.
+    entries:
+      - label: 0-5,000 runs
+        name: tier_1
+        type: metered
+        metric: run
+        limit: 5000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: 5,001-30,000 runs
+        name: tier_2
+        type: metered
+        metric: run
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.01'
+        userMultiplied: false
+      - label: 30,001-100,000 runs
+        name: tier_3
+        type: metered
+        metric: run
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.007'
+        userMultiplied: false
+      - label: 100,000+ runs
+        name: tier_4
+        type: metered
+        metric: run
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.002'
+        userMultiplied: false
+    elements:
+      - name: dbt Core or Quickstart Data Models
+      - name: Scheduled runs
+  - id: fivetran-enterprise
+    name: Business Critical / Enterprise
+    type: enterprise
+    description: Custom contracts with HIPAA, private deployment, hybrid options.
+    entries:
+      - label: Annual (custom)
+        name: annual
+        type: subscription
+        metric: year
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: PrivateLink
+      - name: Hybrid Deployment
+      - name: HIPAA
+      - name: BAA
+      - name: Customer-managed keys
+      - name: Audit logs
