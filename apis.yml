@@ -72,6 +72,15 @@ common:
     sources:
       - https://www.fivetran.com/pricing
     updated: '2026-05-04'
+  - type: Integrations
+    url: https://www.fivetran.com/connectors
+integrations:
+  - name: Fivetran blue
+  - name: Fivetran white
+  - name: Interactive demo
+  - name: LinkedIn
+  - name: x.com
+  - name: Youtube
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
