@@ -38,7 +38,7 @@ apis:
     properties:
       - type: Documentation
         url: https://fivetran.com/docs/rest-api
-      - type: Getting Started
+      - type: GettingStarted
         url: https://fivetran.com/docs/rest-api/getting-started
       - type: Authentication
         url: https://fivetran.com/docs/rest-api/getting-started/system-keys
@@ -49,7 +49,7 @@ common:
     url: https://fivetran.com/docs
   - type: REST API Documentation
     url: https://fivetran.com/docs/rest-api
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/fivetran
   - type: Features
     data:
