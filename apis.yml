@@ -37,6 +37,8 @@ apis:
       - type: Authentication
         url: https://fivetran.com/docs/rest-api/getting-started/system-keys
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/fivetran
   - type: Website
     url: https://www.fivetran.com/
   - type: Documentation
