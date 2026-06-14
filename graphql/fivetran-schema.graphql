@@ -1,0 +1,788 @@
+"""
+Fivetran GraphQL Schema
+Conceptual schema derived from the Fivetran REST API.
+Source: https://fivetran.com/docs/rest-api
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum SyncFrequency {
+  EVERY_1_MINUTE
+  EVERY_5_MINUTES
+  EVERY_15_MINUTES
+  EVERY_30_MINUTES
+  EVERY_60_MINUTES
+  EVERY_6_HOURS
+  EVERY_24_HOURS
+}
+
+enum ConnectorStatus {
+  CONNECTED
+  BROKEN
+  INCOMPLETE
+  PAUSED
+  INITIAL_SYNC_IN_PROGRESS
+  RESCHEDULED
+}
+
+enum SyncState {
+  SCHEDULED
+  SYNCING
+  PAUSED
+  RESCHEDULED
+  ERROR
+  CANCELLED
+  COMPLETED
+}
+
+enum PrivacyMode {
+  MASKED
+  BLOCKED
+  HASHED
+}
+
+enum WebhookEventType {
+  SYNC_START
+  SYNC_END
+  STATUS_CHANGE
+  SCHEMA_CHANGE
+}
+
+enum DbtStatus {
+  PENDING
+  RUNNING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+enum RoleScope {
+  ACCOUNT
+  GROUP
+  CONNECTOR
+  DESTINATION
+}
+
+enum DestinationStatus {
+  CONNECTED
+  BROKEN
+  INCOMPLETE
+}
+
+# ─── User and Access ─────────────────────────────────────────────────────────
+
+"""A Fivetran platform user."""
+type User {
+  id: ID!
+  email: String!
+  givenName: String
+  familyName: String
+  verified: Boolean!
+  invited: Boolean!
+  createdAt: DateTime
+  loggedInAt: DateTime
+  active: Boolean!
+  phone: String
+  picture: String
+  role: String
+  memberships: [Membership!]
+  teamMemberships: [TeamMembership!]
+}
+
+"""A platform-level or resource-scoped role."""
+type Role {
+  id: ID!
+  name: String!
+  description: String
+  scope: RoleScope!
+  isCustom: Boolean!
+  permissions: [String!]
+}
+
+"""Association between a user and a resource with a scoped role."""
+type Membership {
+  userId: ID!
+  user: User
+  role: Role!
+  resourceId: ID!
+  resourceType: String!
+  createdAt: DateTime
+}
+
+"""Association between a user and a team."""
+type TeamMembership {
+  userId: ID!
+  user: User
+  teamId: ID!
+  team: Team
+  role: Role!
+  createdAt: DateTime
+}
+
+# ─── Groups and Teams ─────────────────────────────────────────────────────────
+
+"""A logical grouping of connectors and destinations in Fivetran."""
+type Group {
+  id: ID!
+  name: String!
+  createdAt: DateTime
+  connectors: [GroupConnector!]
+  destinations: [Destination!]
+  memberships: [Membership!]
+}
+
+"""A team of users with shared access to resources."""
+type Team {
+  id: ID!
+  name: String!
+  description: String
+  createdAt: DateTime
+  memberships: [TeamMembership!]
+  roles: [Role!]
+}
+
+# ─── Connectors ──────────────────────────────────────────────────────────────
+
+"""A Fivetran connector instance that syncs data from a source."""
+type Connector {
+  id: ID!
+  service: String!
+  serviceVersion: Int
+  groupId: ID!
+  group: Group
+  schema: String!
+  paused: Boolean!
+  syncFrequency: SyncFrequency!
+  pauseAfterTrial: Boolean!
+  status: ConnectorStatusDetail
+  config: ConnectorConfig
+  auth: ConnectorAuth
+  connectorType: ConnectorType
+  createdAt: DateTime
+  connectedBy: String
+  succeededAt: DateTime
+  failedAt: DateTime
+  dailySyncTime: String
+  scheduleType: String
+  historicalSync: HistoricalSync
+}
+
+"""Runtime status details for a connector."""
+type ConnectorStatusDetail {
+  setupState: String!
+  syncState: SyncState!
+  updateState: String
+  isHistoricalSync: Boolean!
+  tasks: [ConnectorTask!]
+  warnings: [ConnectorWarning!]
+}
+
+"""A task associated with a connector's sync status."""
+type ConnectorTask {
+  code: String!
+  message: String!
+}
+
+"""A warning associated with a connector's sync status."""
+type ConnectorWarning {
+  code: String!
+  message: String!
+}
+
+"""Configuration parameters for a connector (service-specific)."""
+type ConnectorConfig {
+  schema: String
+  table: String
+  host: String
+  port: Int
+  user: String
+  password: String
+  database: String
+  connectionString: String
+  additionalConfig: JSON
+}
+
+"""Authentication credentials associated with a connector."""
+type ConnectorAuth {
+  clientAccess: ConnectorClientAccess
+  refreshToken: String
+  accessToken: String
+  realmId: String
+}
+
+"""OAuth client access details for a connector."""
+type ConnectorClientAccess {
+  clientId: String
+  clientSecret: String
+  userAgent: String
+  developerToken: String
+}
+
+"""A connector instance associated with a specific group."""
+type GroupConnector {
+  id: ID!
+  service: String!
+  schema: String!
+  paused: Boolean!
+  syncFrequency: SyncFrequency!
+  status: ConnectorStatusDetail
+  connectedBy: String
+  createdAt: DateTime
+  succeededAt: DateTime
+  failedAt: DateTime
+}
+
+"""Metadata describing a Fivetran connector type (service definition)."""
+type ConnectorType {
+  id: ID!
+  name: String!
+  description: String
+  type: String!
+  status: String
+  linkToDocs: String
+  linkToErd: String
+  configFields: [ConnectorTypeField!]
+}
+
+"""A configuration field definition for a connector type."""
+type ConnectorTypeField {
+  name: String!
+  description: String
+  dataType: String!
+  required: Boolean!
+  isPii: Boolean
+  defaultValue: String
+}
+
+# ─── Destinations ─────────────────────────────────────────────────────────────
+
+"""A cloud data warehouse destination in Fivetran."""
+type Destination {
+  id: ID!
+  groupId: ID!
+  group: Group
+  service: String!
+  region: String!
+  timeZoneOffset: String
+  setupStatus: DestinationStatus!
+  config: DestinationConfig
+  destinationType: DestinationType
+  createdAt: DateTime
+  fingerprintId: String
+  fingerprint: FingerPrint
+  certificates: [Certificate!]
+}
+
+"""Configuration parameters for a destination (warehouse-specific)."""
+type DestinationConfig {
+  host: String
+  port: Int
+  database: String
+  user: String
+  password: String
+  schema: String
+  connectionString: String
+  projectId: String
+  dataSetLocation: String
+  bucketName: String
+  serverSideEncryption: String
+  additionalConfig: JSON
+}
+
+"""Metadata describing a Fivetran destination type."""
+type DestinationType {
+  id: ID!
+  name: String!
+  description: String
+  type: String!
+  status: String
+  linkToDocs: String
+  configFields: [DestinationTypeField!]
+}
+
+"""A configuration field definition for a destination type."""
+type DestinationTypeField {
+  name: String!
+  description: String
+  dataType: String!
+  required: Boolean!
+  defaultValue: String
+}
+
+# ─── Schema and Metadata ──────────────────────────────────────────────────────
+
+"""A connector schema, containing tables and column-level settings."""
+type Schema {
+  id: ID!
+  connectorId: ID!
+  connector: Connector
+  name: String!
+  enabled: Boolean!
+  tables: [Table!]
+  reloadStatus: SchemaReloadStatus
+}
+
+"""A table within a connector schema."""
+type Table {
+  id: ID!
+  schemaId: ID!
+  name: String!
+  enabled: Boolean!
+  syncMode: String
+  columns: [Column!]
+  privacyMasks: [PrivacyMask!]
+}
+
+"""A column within a schema table."""
+type Column {
+  id: ID!
+  tableId: ID!
+  name: String!
+  enabled: Boolean!
+  hashed: Boolean!
+  isPrimaryKey: Boolean!
+  dataType: String
+}
+
+"""Status of a schema reload operation for a connector."""
+type SchemaReloadStatus {
+  connectorId: ID!
+  status: String!
+  startedAt: DateTime
+  completedAt: DateTime
+  error: String
+}
+
+"""Privacy configuration at the connector level."""
+type Privacy {
+  connectorId: ID!
+  mode: PrivacyMode!
+  enabled: Boolean!
+  maskedColumns: [PrivacyMask!]
+}
+
+"""A privacy mask applied to a specific column."""
+type PrivacyMask {
+  columnId: ID!
+  column: Column
+  mode: PrivacyMode!
+  maskValue: String
+}
+
+"""Metadata for a connector as reported by the Fivetran metadata API."""
+type MetadataConnector {
+  id: ID!
+  connectorId: ID!
+  service: String!
+  schema: String!
+  tables: [MetadataTable!]
+}
+
+"""Metadata for a table as reported by the Fivetran metadata API."""
+type MetadataTable {
+  id: ID!
+  metadataConnectorId: ID!
+  name: String!
+  nameInDestination: String
+  columns: [MetadataColumn!]
+}
+
+"""Metadata for a column as reported by the Fivetran metadata API."""
+type MetadataColumn {
+  id: ID!
+  metadataTableId: ID!
+  name: String!
+  nameInDestination: String
+  type: String
+  isPrimaryKey: Boolean!
+  isForeignKey: Boolean!
+  isFivetranAuditColumn: Boolean!
+}
+
+# ─── Syncs ────────────────────────────────────────────────────────────────────
+
+"""A sync run record for a connector."""
+type Sync {
+  id: ID!
+  connectorId: ID!
+  connector: Connector
+  startedAt: DateTime!
+  completedAt: DateTime
+  status: SyncState!
+  rowsUpdated: Int
+  rowsInserted: Int
+  rowsDeleted: Int
+  error: String
+}
+
+"""Aggregated sync status for a connector."""
+type SyncStatus {
+  connectorId: ID!
+  setupState: String!
+  syncState: SyncState!
+  lastSuccessfulSync: DateTime
+  lastFailedSync: DateTime
+  nextSync: DateTime
+  isHistoricalSync: Boolean!
+}
+
+"""Historical sync state and progress for a connector."""
+type HistoricalSync {
+  connectorId: ID!
+  status: String!
+  taskCode: String
+  taskMessage: String
+}
+
+"""Pause state for a connector or destination."""
+type Pause {
+  connectorId: ID!
+  paused: Boolean!
+  pausedBy: String
+  pausedAt: DateTime
+}
+
+"""A manual or scheduled trigger for a connector sync."""
+type Trigger {
+  connectorId: ID!
+  forcedFullSync: Boolean!
+  triggeredBy: String
+  triggeredAt: DateTime
+}
+
+"""Sync schedule configuration for a connector."""
+type Schedule {
+  connectorId: ID!
+  scheduleType: String!
+  syncFrequency: SyncFrequency
+  dailySyncTime: String
+  pauseAfterTrial: Boolean!
+}
+
+# ─── Transformations ──────────────────────────────────────────────────────────
+
+"""A dbt transformation project in Fivetran."""
+type DbtProject {
+  id: ID!
+  groupId: ID!
+  group: Group
+  createdAt: DateTime
+  createdById: String
+  publicKey: String
+  defaultSchema: String
+  targetName: String
+  gitRemoteUrl: String
+  gitBranch: String
+  models: [DbtModel!]
+  transformations: [DbtTransformation!]
+}
+
+"""A dbt model defined within a dbt project."""
+type DbtModel {
+  id: ID!
+  projectId: ID!
+  project: DbtProject
+  modelName: String!
+  scheduledTime: String
+  runTests: Boolean!
+  status: DbtStatus
+}
+
+"""A dbt transformation job in Fivetran."""
+type DbtTransformation {
+  id: ID!
+  projectId: ID!
+  project: DbtProject
+  modelId: ID!
+  model: DbtModel
+  schedule: DbtSchedule!
+  paused: Boolean!
+  createdAt: DateTime
+  runTests: Boolean!
+  lastRunAt: DateTime
+  outputModelName: String
+  status: DbtStatus
+}
+
+"""Schedule configuration for a dbt transformation."""
+type DbtSchedule {
+  scheduleType: String!
+  daysOfWeek: [String!]
+  interval: Int
+  timeOfDay: String
+  smartSyncing: Boolean
+}
+
+# ─── Webhooks ─────────────────────────────────────────────────────────────────
+
+"""A webhook endpoint registered in Fivetran."""
+type Webhook {
+  id: ID!
+  type: String!
+  groupId: ID
+  connectorId: ID
+  url: String!
+  events: [WebhookEventType!]!
+  active: Boolean!
+  secret: String
+  createdAt: DateTime
+  createdBy: String
+}
+
+# ─── Usage and Billing ────────────────────────────────────────────────────────
+
+"""Monthly Active Row usage for an account or connector."""
+type Usage {
+  connectorId: ID
+  groupId: ID
+  service: String
+  monthlyActiveRows: Int!
+  billingPeriodStart: DateTime!
+  billingPeriodEnd: DateTime!
+}
+
+"""A summary of usage across the account for a billing period."""
+type UsageSummary {
+  accountId: ID!
+  billingPeriodStart: DateTime!
+  billingPeriodEnd: DateTime!
+  totalMonthlyActiveRows: Int!
+  totalTransformationRuns: Int!
+  connectors: [Usage!]
+}
+
+"""Daily active row counts for a connector."""
+type DailyActiveRows {
+  connectorId: ID!
+  date: String!
+  activeRows: Int!
+}
+
+"""API rate limit configuration for the account."""
+type Limit {
+  requestsPerMinute: Int!
+  remainingRequests: Int
+  resetAt: DateTime
+}
+
+"""A dashboard-level summary of account health and resource counts."""
+type Dashboard {
+  accountId: ID!
+  totalConnectors: Int!
+  activeConnectors: Int!
+  brokenConnectors: Int!
+  pausedConnectors: Int!
+  totalDestinations: Int!
+  totalUsers: Int!
+  lastUpdated: DateTime
+}
+
+# ─── Security ─────────────────────────────────────────────────────────────────
+
+"""An SSL/TLS certificate registered for a destination or connector."""
+type Certificate {
+  id: ID!
+  hash: String!
+  name: String
+  type: String!
+  validFrom: DateTime
+  validTo: DateTime
+  sha1: String
+  publicKey: String
+  encodedCert: String
+}
+
+"""An SSH host fingerprint registered for a connector or destination."""
+type FingerPrint {
+  id: ID!
+  hash: String!
+  publicKey: String!
+  validatedBy: String
+  validatedAt: DateTime
+}
+
+"""API key configuration for a Fivetran account or user."""
+type ApiConfig {
+  key: String!
+  secret: String
+  createdAt: DateTime
+  expiresAt: DateTime
+  active: Boolean!
+}
+
+# ─── Setup and Configuration ──────────────────────────────────────────────────
+
+"""Setup tests and validation results for a connector or destination."""
+type Setup {
+  id: ID!
+  resourceId: ID!
+  resourceType: String!
+  status: String!
+  setupTests: [SetupTest!]
+}
+
+"""An individual setup test result."""
+type SetupTest {
+  title: String!
+  status: String!
+  message: String
+}
+
+"""Generic metadata object for annotating any Fivetran resource."""
+type Metadata {
+  resourceId: ID!
+  resourceType: String!
+  key: String!
+  value: String!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ─── ConnectorSchema (schema-level toggle wrapper) ────────────────────────────
+
+"""A schema-level configuration record returned from the schema endpoint."""
+type ConnectorSchema {
+  connectorId: ID!
+  schemaChangeHandling: String!
+  schemas: [Schema!]
+}
+
+# ─── Root Types ───────────────────────────────────────────────────────────────
+
+type Query {
+  # Users
+  user(id: ID!): User
+  users(limit: Int, cursor: String): [User!]
+
+  # Groups
+  group(id: ID!): Group
+  groups(limit: Int, cursor: String): [Group!]
+
+  # Teams
+  team(id: ID!): Team
+  teams(limit: Int, cursor: String): [Team!]
+
+  # Roles
+  role(id: ID!): Role
+  roles: [Role!]
+
+  # Connectors
+  connector(id: ID!): Connector
+  connectors(groupId: ID, limit: Int, cursor: String): [Connector!]
+  groupConnectors(groupId: ID!): [GroupConnector!]
+  connectorType(service: String!): ConnectorType
+  connectorTypes: [ConnectorType!]
+
+  # Destinations
+  destination(id: ID!): Destination
+  destinations(groupId: ID, limit: Int, cursor: String): [Destination!]
+  destinationType(service: String!): DestinationType
+  destinationTypes: [DestinationType!]
+
+  # Schema
+  connectorSchema(connectorId: ID!): ConnectorSchema
+  schemaReloadStatus(connectorId: ID!): SchemaReloadStatus
+
+  # Metadata API
+  metadataConnector(connectorId: ID!): MetadataConnector
+  metadataTables(connectorId: ID!): [MetadataTable!]
+  metadataColumns(tableId: ID!): [MetadataColumn!]
+
+  # Syncs
+  syncStatus(connectorId: ID!): SyncStatus
+  syncs(connectorId: ID!, limit: Int, cursor: String): [Sync!]
+  historicalSync(connectorId: ID!): HistoricalSync
+
+  # Transformations
+  dbtProject(id: ID!): DbtProject
+  dbtProjects(groupId: ID, limit: Int, cursor: String): [DbtProject!]
+  dbtModel(id: ID!): DbtModel
+  dbtTransformation(id: ID!): DbtTransformation
+  dbtTransformations(projectId: ID!): [DbtTransformation!]
+
+  # Webhooks
+  webhook(id: ID!): Webhook
+  webhooks(groupId: ID, connectorId: ID): [Webhook!]
+
+  # Usage
+  usageSummary(accountId: ID!, billingPeriodStart: String, billingPeriodEnd: String): UsageSummary
+  dailyActiveRows(connectorId: ID!, startDate: String, endDate: String): [DailyActiveRows!]
+
+  # Security
+  certificate(id: ID!): Certificate
+  certificates(destinationId: ID, connectorId: ID): [Certificate!]
+  fingerprint(id: ID!): FingerPrint
+  fingerprints(destinationId: ID, connectorId: ID): [FingerPrint!]
+
+  # Dashboard
+  dashboard: Dashboard
+  apiLimit: Limit
+}
+
+type Mutation {
+  # Users
+  createUser(email: String!, givenName: String, familyName: String, role: String): User
+  updateUser(id: ID!, givenName: String, familyName: String, phone: String, picture: String): User
+  deleteUser(id: ID!): Boolean
+
+  # Groups
+  createGroup(name: String!): Group
+  updateGroup(id: ID!, name: String!): Group
+  deleteGroup(id: ID!): Boolean
+
+  # Connectors
+  createConnector(groupId: ID!, service: String!, config: JSON, auth: JSON, syncFrequency: SyncFrequency): Connector
+  updateConnector(id: ID!, config: JSON, auth: JSON, syncFrequency: SyncFrequency, paused: Boolean): Connector
+  deleteConnector(id: ID!): Boolean
+  syncConnector(connectorId: ID!, forcedFullSync: Boolean): Trigger
+  pauseConnector(connectorId: ID!, paused: Boolean!): Pause
+  resetConnector(connectorId: ID!): Boolean
+  resyncConnectorTable(connectorId: ID!, schema: String!, table: String!): Boolean
+
+  # Schema
+  updateConnectorSchema(connectorId: ID!, schemaChangeHandling: String, schemas: JSON): ConnectorSchema
+  reloadConnectorSchema(connectorId: ID!): SchemaReloadStatus
+
+  # Destinations
+  createDestination(groupId: ID!, service: String!, region: String!, config: JSON, timeZoneOffset: String): Destination
+  updateDestination(id: ID!, config: JSON, timeZoneOffset: String): Destination
+  deleteDestination(id: ID!): Boolean
+  testDestination(id: ID!): Setup
+
+  # Webhooks
+  createWebhook(url: String!, events: [WebhookEventType!]!, groupId: ID, connectorId: ID, secret: String, active: Boolean): Webhook
+  updateWebhook(id: ID!, url: String, events: [WebhookEventType!], secret: String, active: Boolean): Webhook
+  deleteWebhook(id: ID!): Boolean
+  testWebhook(id: ID!): Boolean
+
+  # Transformations
+  createDbtProject(groupId: ID!, gitRemoteUrl: String!, gitBranch: String, defaultSchema: String, targetName: String): DbtProject
+  updateDbtProject(id: ID!, gitBranch: String, defaultSchema: String, targetName: String): DbtProject
+  deleteDbtProject(id: ID!): Boolean
+  createDbtTransformation(projectId: ID!, modelId: ID!, schedule: JSON, paused: Boolean, runTests: Boolean): DbtTransformation
+  updateDbtTransformation(id: ID!, schedule: JSON, paused: Boolean, runTests: Boolean): DbtTransformation
+  deleteDbtTransformation(id: ID!): Boolean
+  runDbtTransformation(id: ID!): DbtTransformation
+
+  # Memberships
+  addUserToGroup(groupId: ID!, userId: ID!, role: String!): Membership
+  updateGroupMembership(groupId: ID!, userId: ID!, role: String!): Membership
+  removeUserFromGroup(groupId: ID!, userId: ID!): Boolean
+  addUserToTeam(teamId: ID!, userId: ID!, role: String!): TeamMembership
+  removeUserFromTeam(teamId: ID!, userId: ID!): Boolean
+
+  # Certificates and Fingerprints
+  addCertificate(destinationId: ID, connectorId: ID, encodedCert: String!, hash: String!, name: String, type: String): Certificate
+  deleteCertificate(id: ID!): Boolean
+  addFingerprint(destinationId: ID, connectorId: ID, publicKey: String!, hash: String!, validatedBy: String): FingerPrint
+  deleteFingerprint(id: ID!): Boolean
+
+  # API Config
+  createApiKey(userId: ID): ApiConfig
+  deleteApiKey(key: String!): Boolean
+}
