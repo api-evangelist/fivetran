@@ -1,0 +1,654 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fivetran REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "List connections",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/connections",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List connections"
+    },
+    {
+      "info": {
+        "name": "Create a connection",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/connections",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a connection"
+    },
+    {
+      "info": {
+        "name": "Retrieve a connection",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a connection"
+    },
+    {
+      "info": {
+        "name": "Modify a connection",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Modify a connection"
+    },
+    {
+      "info": {
+        "name": "Delete a connection",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Delete a connection"
+    },
+    {
+      "info": {
+        "name": "Trigger incremental sync",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId/sync",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Trigger incremental sync"
+    },
+    {
+      "info": {
+        "name": "Trigger historical re-sync",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId/resync",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Trigger historical re-sync"
+    },
+    {
+      "info": {
+        "name": "Run setup validation tests",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId/test",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Run setup validation tests"
+    },
+    {
+      "info": {
+        "name": "Retrieve sync state",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId/state",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve sync state"
+    },
+    {
+      "info": {
+        "name": "Update sync state",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId/state",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update sync state"
+    },
+    {
+      "info": {
+        "name": "Generate a Connect Card URL",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/connections/:connectionId/connect-card",
+        "params": [
+          {
+            "name": "connectionId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Generate a Connect Card URL"
+    },
+    {
+      "info": {
+        "name": "List users",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/users"
+      },
+      "docs": "List users"
+    },
+    {
+      "info": {
+        "name": "Invite a user",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/users",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Invite a user"
+    },
+    {
+      "info": {
+        "name": "Retrieve a user",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/users/:userId",
+        "params": [
+          {
+            "name": "userId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a user"
+    },
+    {
+      "info": {
+        "name": "Update a user",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.fivetran.com/v1/users/:userId",
+        "params": [
+          {
+            "name": "userId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a user"
+    },
+    {
+      "info": {
+        "name": "Delete a user",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.fivetran.com/v1/users/:userId",
+        "params": [
+          {
+            "name": "userId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Delete a user"
+    },
+    {
+      "info": {
+        "name": "List groups",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/groups"
+      },
+      "docs": "List groups"
+    },
+    {
+      "info": {
+        "name": "Create a group",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/groups",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a group"
+    },
+    {
+      "info": {
+        "name": "Retrieve a group",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/groups/:groupId",
+        "params": [
+          {
+            "name": "groupId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a group"
+    },
+    {
+      "info": {
+        "name": "Modify a group",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.fivetran.com/v1/groups/:groupId",
+        "params": [
+          {
+            "name": "groupId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Modify a group"
+    },
+    {
+      "info": {
+        "name": "Delete a group",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.fivetran.com/v1/groups/:groupId",
+        "params": [
+          {
+            "name": "groupId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Delete a group"
+    },
+    {
+      "info": {
+        "name": "Create a destination",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/destinations",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a destination"
+    },
+    {
+      "info": {
+        "name": "Retrieve a destination",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/destinations/:destinationId",
+        "params": [
+          {
+            "name": "destinationId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a destination"
+    },
+    {
+      "info": {
+        "name": "Modify a destination",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.fivetran.com/v1/destinations/:destinationId",
+        "params": [
+          {
+            "name": "destinationId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Modify a destination"
+    },
+    {
+      "info": {
+        "name": "Delete a destination",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.fivetran.com/v1/destinations/:destinationId",
+        "params": [
+          {
+            "name": "destinationId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Delete a destination"
+    },
+    {
+      "info": {
+        "name": "List webhooks",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/webhooks"
+      },
+      "docs": "List webhooks"
+    },
+    {
+      "info": {
+        "name": "Create an account-level webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/webhooks/account",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an account-level webhook"
+    },
+    {
+      "info": {
+        "name": "Create a group-level webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/webhooks/group/:groupId",
+        "params": [
+          {
+            "name": "groupId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a group-level webhook"
+    },
+    {
+      "info": {
+        "name": "Retrieve a webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/webhooks/:webhookId",
+        "params": [
+          {
+            "name": "webhookId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a webhook"
+    },
+    {
+      "info": {
+        "name": "Update a webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.fivetran.com/v1/webhooks/:webhookId",
+        "params": [
+          {
+            "name": "webhookId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a webhook"
+    },
+    {
+      "info": {
+        "name": "Delete a webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.fivetran.com/v1/webhooks/:webhookId",
+        "params": [
+          {
+            "name": "webhookId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Delete a webhook"
+    },
+    {
+      "info": {
+        "name": "Test a webhook delivery",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/webhooks/:webhookId/test",
+        "params": [
+          {
+            "name": "webhookId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Test a webhook delivery"
+    },
+    {
+      "info": {
+        "name": "List supported connector types",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/metadata/connector-types"
+      },
+      "docs": "List supported connector types"
+    },
+    {
+      "info": {
+        "name": "List roles",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/roles"
+      },
+      "docs": "List roles"
+    },
+    {
+      "info": {
+        "name": "List teams",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.fivetran.com/v1/teams"
+      },
+      "docs": "List teams"
+    },
+    {
+      "info": {
+        "name": "Create a team",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.fivetran.com/v1/teams",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a team"
+    }
+  ],
+  "bundled": true
+}
