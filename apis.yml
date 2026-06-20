@@ -6,7 +6,7 @@ description: Fivetran is an automated data integration platform providing pre-bu
   roles, destinations, connections, transformations, webhooks, certificates, and connector
   metadata.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Connectors
 - Data Integration
@@ -26,7 +26,7 @@ apis:
     transformations, transformation projects, certificates, system keys, hybrid deployment
     agents, log services, private links, proxy agents, and connector metadata. Authentication
     is performed using a system key.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://fivetran.com/docs/rest-api
   baseURL: https://api.fivetran.com/v1
   tags:
