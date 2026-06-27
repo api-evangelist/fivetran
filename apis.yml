@@ -85,8 +85,8 @@ common:
   type: MCPServer
 - name: Agent Skills
   url: https://github.com/fivetran/claude-sap-skills
-  type: AgentSkill
-- type: LLMsTxt
+  type: AgentSkills
+- type: LlmsText
   url: https://fivetran.com/llms.txt
 integrations:
 - name: Fivetran blue
