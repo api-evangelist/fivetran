@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/fivetran-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic auth using `<api_key>:<api_secret>`
+  sources:
+  - openapi/fivetran-openapi.yml
