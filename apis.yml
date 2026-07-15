@@ -47,6 +47,8 @@ apis:
   - url: graphql/fivetran-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/fivetran-agentic-access.yml
 - type: TrustCenter
   url: security/fivetran-trust-center.yml
 - type: DomainSecurity
