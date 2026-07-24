@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Fivetran REST Connections Destinations API
+  description: Programmatic management of Fivetran resources including connections, users, groups, destinations, teams, roles, webhooks, transformations, certificates, and connector metadata. Authentication uses a Fivetran system API key as HTTP Basic credentials (key:secret).
+  version: '1.0'
+  contact:
+    name: Fivetran
+    url: https://fivetran.com/docs/rest-api
+servers:
+- url: https://api.fivetran.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Destinations
+paths:
+  /destinations:
+    post:
+      summary: Create a destination
+      operationId: createDestination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - group_id
+              - service
+              - region
+              - time_zone_offset
+              properties:
+                group_id:
+                  type: string
+                service:
+                  type: string
+                region:
+                  type: string
+                time_zone_offset:
+                  type: string
+                config:
+                  type: object
+      responses:
+        '201':
+          description: Created destination
+      tags:
+      - Destinations
+  /destinations/{destinationId}:
+    get:
+      summary: Retrieve a destination
+      operationId: getDestination
+      parameters:
+      - name: destinationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Destination details
+      tags:
+      - Destinations
+    patch:
+      summary: Modify a destination
+      operationId: updateDestination
+      parameters:
+      - name: destinationId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated destination
+      tags:
+      - Destinations
+    delete:
+      summary: Delete a destination
+      operationId: deleteDestination
+      parameters:
+      - name: destinationId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deleted
+      tags:
+      - Destinations
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth using `<api_key>:<api_secret>`

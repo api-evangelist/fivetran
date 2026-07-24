@@ -1,0 +1,31 @@
+openapi: 3.1.0
+info:
+  title: Fivetran REST Connections Metadata API
+  description: Programmatic management of Fivetran resources including connections, users, groups, destinations, teams, roles, webhooks, transformations, certificates, and connector metadata. Authentication uses a Fivetran system API key as HTTP Basic credentials (key:secret).
+  version: '1.0'
+  contact:
+    name: Fivetran
+    url: https://fivetran.com/docs/rest-api
+servers:
+- url: https://api.fivetran.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Metadata
+paths:
+  /metadata/connector-types:
+    get:
+      summary: List supported connector types
+      operationId: listConnectorTypes
+      responses:
+        '200':
+          description: Connector type metadata
+      tags:
+      - Metadata
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth using `<api_key>:<api_secret>`

@@ -1,0 +1,234 @@
+openapi: 3.1.0
+info:
+  title: Fivetran REST Connections API
+  description: Programmatic management of Fivetran resources including connections, users, groups, destinations, teams, roles, webhooks, transformations, certificates, and connector metadata. Authentication uses a Fivetran system API key as HTTP Basic credentials (key:secret).
+  version: '1.0'
+  contact:
+    name: Fivetran
+    url: https://fivetran.com/docs/rest-api
+servers:
+- url: https://api.fivetran.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Connections
+paths:
+  /connections:
+    get:
+      summary: List connections
+      operationId: listConnections
+      parameters:
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Connection list
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Connections
+    post:
+      summary: Create a connection
+      operationId: createConnection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - service
+              - group_id
+              properties:
+                service:
+                  type: string
+                group_id:
+                  type: string
+                config:
+                  type: object
+                paused:
+                  type: boolean
+                sync_frequency:
+                  type: integer
+      responses:
+        '201':
+          description: Created connection
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Connections
+  /connections/{connectionId}:
+    get:
+      summary: Retrieve a connection
+      operationId: getConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '200':
+          description: Connection details
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Connections
+    patch:
+      summary: Modify a connection
+      operationId: updateConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated connection
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Connections
+    delete:
+      summary: Delete a connection
+      operationId: deleteConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '200':
+          description: Deleted
+      tags:
+      - Connections
+  /connections/{connectionId}/sync:
+    post:
+      summary: Trigger incremental sync
+      operationId: syncConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+      responses:
+        '200':
+          description: Sync triggered
+      tags:
+      - Connections
+  /connections/{connectionId}/resync:
+    post:
+      summary: Trigger historical re-sync
+      operationId: resyncConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scope:
+                  type: object
+      responses:
+        '200':
+          description: Resync triggered
+      tags:
+      - Connections
+  /connections/{connectionId}/test:
+    post:
+      summary: Run setup validation tests
+      operationId: testConnection
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                trust_certificates:
+                  type: boolean
+                trust_fingerprints:
+                  type: boolean
+      responses:
+        '200':
+          description: Test results
+      tags:
+      - Connections
+  /connections/{connectionId}/state:
+    get:
+      summary: Retrieve sync state
+      operationId: getConnectionState
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '200':
+          description: Sync state
+      tags:
+      - Connections
+    patch:
+      summary: Update sync state
+      operationId: updateConnectionState
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated state
+      tags:
+      - Connections
+  /connections/{connectionId}/connect-card:
+    post:
+      summary: Generate a Connect Card URL
+      operationId: createConnectCard
+      parameters:
+      - $ref: '#/components/parameters/ConnectionId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Connect Card URL
+      tags:
+      - Connections
+components:
+  parameters:
+    ConnectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth using `<api_key>:<api_secret>`

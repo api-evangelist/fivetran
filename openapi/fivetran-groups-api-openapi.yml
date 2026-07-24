@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Fivetran REST Connections Groups API
+  description: Programmatic management of Fivetran resources including connections, users, groups, destinations, teams, roles, webhooks, transformations, certificates, and connector metadata. Authentication uses a Fivetran system API key as HTTP Basic credentials (key:secret).
+  version: '1.0'
+  contact:
+    name: Fivetran
+    url: https://fivetran.com/docs/rest-api
+servers:
+- url: https://api.fivetran.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Groups
+paths:
+  /groups:
+    get:
+      summary: List groups
+      operationId: listGroups
+      responses:
+        '200':
+          description: Groups
+      tags:
+      - Groups
+    post:
+      summary: Create a group
+      operationId: createGroup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Created group
+      tags:
+      - Groups
+  /groups/{groupId}:
+    get:
+      summary: Retrieve a group
+      operationId: getGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupId'
+      responses:
+        '200':
+          description: Group details
+      tags:
+      - Groups
+    patch:
+      summary: Modify a group
+      operationId: updateGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated group
+      tags:
+      - Groups
+    delete:
+      summary: Delete a group
+      operationId: deleteGroup
+      parameters:
+      - $ref: '#/components/parameters/GroupId'
+      responses:
+        '200':
+          description: Deleted
+      tags:
+      - Groups
+components:
+  parameters:
+    GroupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth using `<api_key>:<api_secret>`

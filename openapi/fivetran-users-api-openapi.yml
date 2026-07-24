@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Fivetran REST Connections Users API
+  description: Programmatic management of Fivetran resources including connections, users, groups, destinations, teams, roles, webhooks, transformations, certificates, and connector metadata. Authentication uses a Fivetran system API key as HTTP Basic credentials (key:secret).
+  version: '1.0'
+  contact:
+    name: Fivetran
+    url: https://fivetran.com/docs/rest-api
+servers:
+- url: https://api.fivetran.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Users
+paths:
+  /users:
+    get:
+      summary: List users
+      operationId: listUsers
+      responses:
+        '200':
+          description: User list
+      tags:
+      - Users
+    post:
+      summary: Invite a user
+      operationId: inviteUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              properties:
+                email:
+                  type: string
+                  format: email
+                given_name:
+                  type: string
+                family_name:
+                  type: string
+                role:
+                  type: string
+      responses:
+        '200':
+          description: User invited
+      tags:
+      - Users
+  /users/{userId}:
+    get:
+      summary: Retrieve a user
+      operationId: getUser
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: User details
+      tags:
+      - Users
+    patch:
+      summary: Update a user
+      operationId: updateUser
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated user
+      tags:
+      - Users
+    delete:
+      summary: Delete a user
+      operationId: deleteUser
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: Deleted
+      tags:
+      - Users
+components:
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth using `<api_key>:<api_secret>`

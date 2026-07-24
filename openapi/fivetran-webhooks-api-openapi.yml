@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Fivetran REST Connections Webhooks API
+  description: Programmatic management of Fivetran resources including connections, users, groups, destinations, teams, roles, webhooks, transformations, certificates, and connector metadata. Authentication uses a Fivetran system API key as HTTP Basic credentials (key:secret).
+  version: '1.0'
+  contact:
+    name: Fivetran
+    url: https://fivetran.com/docs/rest-api
+servers:
+- url: https://api.fivetran.com/v1
+  description: Production
+security:
+- basicAuth: []
+tags:
+- name: Webhooks
+paths:
+  /webhooks:
+    get:
+      summary: List webhooks
+      operationId: listWebhooks
+      responses:
+        '200':
+          description: Webhooks
+      tags:
+      - Webhooks
+  /webhooks/account:
+    post:
+      summary: Create an account-level webhook
+      operationId: createAccountWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - url
+              - events
+              properties:
+                url:
+                  type: string
+                  format: uri
+                events:
+                  type: array
+                  items:
+                    type: string
+                active:
+                  type: boolean
+                secret:
+                  type: string
+      responses:
+        '201':
+          description: Webhook created
+      tags:
+      - Webhooks
+  /webhooks/group/{groupId}:
+    post:
+      summary: Create a group-level webhook
+      operationId: createGroupWebhook
+      parameters:
+      - $ref: '#/components/parameters/GroupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - url
+              - events
+              properties:
+                url:
+                  type: string
+                  format: uri
+                events:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Webhook created
+      tags:
+      - Webhooks
+  /webhooks/{webhookId}:
+    get:
+      summary: Retrieve a webhook
+      operationId: getWebhook
+      parameters:
+      - name: webhookId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook
+      tags:
+      - Webhooks
+    patch:
+      summary: Update a webhook
+      operationId: updateWebhook
+      parameters:
+      - name: webhookId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated
+      tags:
+      - Webhooks
+    delete:
+      summary: Delete a webhook
+      operationId: deleteWebhook
+      parameters:
+      - name: webhookId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deleted
+      tags:
+      - Webhooks
+  /webhooks/{webhookId}/test:
+    post:
+      summary: Test a webhook delivery
+      operationId: testWebhook
+      parameters:
+      - name: webhookId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Test result
+      tags:
+      - Webhooks
+components:
+  parameters:
+    GroupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth using `<api_key>:<api_secret>`
