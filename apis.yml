@@ -6,7 +6,20 @@ description: Fivetran is an automated data integration platform providing pre-bu
   roles, destinations, connections, transformations, webhooks, certificates, and connector
   metadata.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fivetran.png
 tags:
 - Connectors
 - Data Integration
@@ -21,11 +34,11 @@ specificationVersion: '0.19'
 apis:
 - aid: fivetran:fivetran-rest-api
   name: Fivetran REST API
-  description: The Fivetran REST API allows programmatic management of all platform
-    resources including users, roles, teams, groups, destinations, connections, webhooks,
-    transformations, transformation projects, certificates, system keys, hybrid deployment
-    agents, log services, private links, proxy agents, and connector metadata. Authentication
-    is performed using a system key.
+  description: >-
+    The Fivetran REST API allows programmatic management of all platform resources including users, roles,
+    teams, groups, destinations, connections, webhooks, transformations, transformation projects, certificates,
+    system keys, hybrid deployment agents, log services, private links, proxy agents, and connector metadata.
+    Authentication is performed using a system key.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://fivetran.com/docs/rest-api
   baseURL: https://api.fivetran.com/v1
@@ -46,6 +59,86 @@ apis:
     url: https://fivetran.com/docs/rest-api/getting-started/system-keys
   - url: graphql/fivetran-graphql.md
     type: GraphQL
+- aid: fivetran:fivetran-connections-api
+  name: Fivetran Connections API
+  description: The Connections API from Fivetran — 7 operation(s) for connections.
+  humanURL: https://fivetran.com/docs/rest-api
+  baseURL: https://api.fivetran.com/v1
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/fivetran-connections-api-openapi.yml
+- aid: fivetran:fivetran-destinations-api
+  name: Fivetran Destinations API
+  description: The Destinations API from Fivetran — 2 operation(s) for destinations.
+  humanURL: https://fivetran.com/docs/rest-api
+  baseURL: https://api.fivetran.com/v1
+  tags:
+  - Destinations
+  properties:
+  - type: OpenAPI
+    url: openapi/fivetran-destinations-api-openapi.yml
+- aid: fivetran:fivetran-groups-api
+  name: Fivetran Groups API
+  description: The Groups API from Fivetran — 2 operation(s) for groups.
+  humanURL: https://fivetran.com/docs/rest-api
+  baseURL: https://api.fivetran.com/v1
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/fivetran-groups-api-openapi.yml
+- aid: fivetran:fivetran-metadata-api
+  name: Fivetran Metadata API
+  description: The Metadata API from Fivetran — 1 operation(s) for metadata.
+  humanURL: https://fivetran.com/docs/rest-api
+  baseURL: https://api.fivetran.com/v1
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/fivetran-metadata-api-openapi.yml
+- aid: fivetran:fivetran-roles-api
+  name: Fivetran Roles API
+  description: The Roles API from Fivetran — 1 operation(s) for roles.
+  humanURL: https://fivetran.com/docs/rest-api
+  baseURL: https://api.fivetran.com/v1
+  tags:
+  - Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/fivetran-roles-api-openapi.yml
+- aid: fivetran:fivetran-teams-api
+  name: Fivetran Teams API
+  description: The Teams API from Fivetran — 1 operation(s) for teams.
+  humanURL: https://fivetran.com/docs/rest-api
+  baseURL: https://api.fivetran.com/v1
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/fivetran-teams-api-openapi.yml
+- aid: fivetran:fivetran-users-api
+  name: Fivetran Users API
+  description: The Users API from Fivetran — 2 operation(s) for users.
+  humanURL: https://fivetran.com/docs/rest-api
+  baseURL: https://api.fivetran.com/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/fivetran-users-api-openapi.yml
+- aid: fivetran:fivetran-webhooks-api
+  name: Fivetran Webhooks API
+  description: The Webhooks API from Fivetran — 5 operation(s) for webhooks.
+  humanURL: https://fivetran.com/docs/rest-api
+  baseURL: https://api.fivetran.com/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/fivetran-webhooks-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/fivetran-agentic-access.yml
