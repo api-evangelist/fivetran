@@ -1,0 +1,561 @@
+openapi: 3.1.0
+info:
+  title: Fivetran REST API
+  description: >-
+    Programmatic management of Fivetran resources including connections, users,
+    groups, destinations, teams, roles, webhooks, transformations, certificates,
+    and connector metadata. Authentication uses a Fivetran system API key as
+    HTTP Basic credentials (key:secret).
+  version: "1.0"
+  contact:
+    name: Fivetran
+    url: https://fivetran.com/docs/rest-api
+servers:
+  - url: https://api.fivetran.com/v1
+    description: Production
+security:
+  - basicAuth: []
+paths:
+  /connections:
+    get:
+      summary: List connections
+      operationId: listConnections
+      parameters:
+        - name: cursor
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Connection list
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Create a connection
+      operationId: createConnection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [service, group_id]
+              properties:
+                service:
+                  type: string
+                group_id:
+                  type: string
+                config:
+                  type: object
+                paused:
+                  type: boolean
+                sync_frequency:
+                  type: integer
+      responses:
+        "201":
+          description: Created connection
+          content:
+            application/json:
+              schema:
+                type: object
+  /connections/{connectionId}:
+    get:
+      summary: Retrieve a connection
+      operationId: getConnection
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      responses:
+        "200":
+          description: Connection details
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      summary: Modify a connection
+      operationId: updateConnection
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Updated connection
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      summary: Delete a connection
+      operationId: deleteConnection
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      responses:
+        "200":
+          description: Deleted
+  /connections/{connectionId}/sync:
+    post:
+      summary: Trigger incremental sync
+      operationId: syncConnection
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+      responses:
+        "200":
+          description: Sync triggered
+  /connections/{connectionId}/resync:
+    post:
+      summary: Trigger historical re-sync
+      operationId: resyncConnection
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scope:
+                  type: object
+      responses:
+        "200":
+          description: Resync triggered
+  /connections/{connectionId}/test:
+    post:
+      summary: Run setup validation tests
+      operationId: testConnection
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                trust_certificates:
+                  type: boolean
+                trust_fingerprints:
+                  type: boolean
+      responses:
+        "200":
+          description: Test results
+  /connections/{connectionId}/state:
+    get:
+      summary: Retrieve sync state
+      operationId: getConnectionState
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      responses:
+        "200":
+          description: Sync state
+    patch:
+      summary: Update sync state
+      operationId: updateConnectionState
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Updated state
+  /connections/{connectionId}/connect-card:
+    post:
+      summary: Generate a Connect Card URL
+      operationId: createConnectCard
+      parameters:
+        - $ref: "#/components/parameters/ConnectionId"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Connect Card URL
+  /users:
+    get:
+      summary: List users
+      operationId: listUsers
+      responses:
+        "200":
+          description: User list
+    post:
+      summary: Invite a user
+      operationId: inviteUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+                given_name:
+                  type: string
+                family_name:
+                  type: string
+                role:
+                  type: string
+      responses:
+        "200":
+          description: User invited
+  /users/{userId}:
+    get:
+      summary: Retrieve a user
+      operationId: getUser
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: User details
+    patch:
+      summary: Update a user
+      operationId: updateUser
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Updated user
+    delete:
+      summary: Delete a user
+      operationId: deleteUser
+      parameters:
+        - $ref: "#/components/parameters/UserId"
+      responses:
+        "200":
+          description: Deleted
+  /groups:
+    get:
+      summary: List groups
+      operationId: listGroups
+      responses:
+        "200":
+          description: Groups
+    post:
+      summary: Create a group
+      operationId: createGroup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+      responses:
+        "201":
+          description: Created group
+  /groups/{groupId}:
+    get:
+      summary: Retrieve a group
+      operationId: getGroup
+      parameters:
+        - $ref: "#/components/parameters/GroupId"
+      responses:
+        "200":
+          description: Group details
+    patch:
+      summary: Modify a group
+      operationId: updateGroup
+      parameters:
+        - $ref: "#/components/parameters/GroupId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Updated group
+    delete:
+      summary: Delete a group
+      operationId: deleteGroup
+      parameters:
+        - $ref: "#/components/parameters/GroupId"
+      responses:
+        "200":
+          description: Deleted
+  /destinations:
+    post:
+      summary: Create a destination
+      operationId: createDestination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [group_id, service, region, time_zone_offset]
+              properties:
+                group_id:
+                  type: string
+                service:
+                  type: string
+                region:
+                  type: string
+                time_zone_offset:
+                  type: string
+                config:
+                  type: object
+      responses:
+        "201":
+          description: Created destination
+  /destinations/{destinationId}:
+    get:
+      summary: Retrieve a destination
+      operationId: getDestination
+      parameters:
+        - name: destinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Destination details
+    patch:
+      summary: Modify a destination
+      operationId: updateDestination
+      parameters:
+        - name: destinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Updated destination
+    delete:
+      summary: Delete a destination
+      operationId: deleteDestination
+      parameters:
+        - name: destinationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Deleted
+  /webhooks:
+    get:
+      summary: List webhooks
+      operationId: listWebhooks
+      responses:
+        "200":
+          description: Webhooks
+  /webhooks/account:
+    post:
+      summary: Create an account-level webhook
+      operationId: createAccountWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url, events]
+              properties:
+                url:
+                  type: string
+                  format: uri
+                events:
+                  type: array
+                  items:
+                    type: string
+                active:
+                  type: boolean
+                secret:
+                  type: string
+      responses:
+        "201":
+          description: Webhook created
+  /webhooks/group/{groupId}:
+    post:
+      summary: Create a group-level webhook
+      operationId: createGroupWebhook
+      parameters:
+        - $ref: "#/components/parameters/GroupId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url, events]
+              properties:
+                url:
+                  type: string
+                  format: uri
+                events:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "201":
+          description: Webhook created
+  /webhooks/{webhookId}:
+    get:
+      summary: Retrieve a webhook
+      operationId: getWebhook
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Webhook
+    patch:
+      summary: Update a webhook
+      operationId: updateWebhook
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Updated
+    delete:
+      summary: Delete a webhook
+      operationId: deleteWebhook
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Deleted
+  /webhooks/{webhookId}/test:
+    post:
+      summary: Test a webhook delivery
+      operationId: testWebhook
+      parameters:
+        - name: webhookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Test result
+  /metadata/connector-types:
+    get:
+      summary: List supported connector types
+      operationId: listConnectorTypes
+      responses:
+        "200":
+          description: Connector type metadata
+  /roles:
+    get:
+      summary: List roles
+      operationId: listRoles
+      responses:
+        "200":
+          description: Roles
+  /teams:
+    get:
+      summary: List teams
+      operationId: listTeams
+      responses:
+        "200":
+          description: Teams
+    post:
+      summary: Create a team
+      operationId: createTeam
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                role:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "201":
+          description: Team created
+components:
+  parameters:
+    ConnectionId:
+      name: connectionId
+      in: path
+      required: true
+      schema:
+        type: string
+    UserId:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: string
+    GroupId:
+      name: groupId
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic auth using `<api_key>:<api_secret>`

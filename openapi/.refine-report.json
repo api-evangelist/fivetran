@@ -1,0 +1,28 @@
+{
+  "provider": "fivetran",
+  "sources": [
+    "fivetran-connections-api-openapi.yml",
+    "fivetran-destinations-api-openapi.yml",
+    "fivetran-groups-api-openapi.yml",
+    "fivetran-metadata-api-openapi.yml",
+    "fivetran-roles-api-openapi.yml",
+    "fivetran-teams-api-openapi.yml",
+    "fivetran-users-api-openapi.yml",
+    "fivetran-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "fivetran-connections-api-openapi.yml",
+    "fivetran-destinations-api-openapi.yml",
+    "fivetran-groups-api-openapi.yml",
+    "fivetran-metadata-api-openapi.yml",
+    "fivetran-roles-api-openapi.yml",
+    "fivetran-teams-api-openapi.yml",
+    "fivetran-users-api-openapi.yml",
+    "fivetran-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
