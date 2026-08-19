@@ -1,0 +1,249 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fivetran REST Connections API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fivetran.com/v1/connections",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List connections"
+        },
+        {
+          "info": {
+            "name": "Create a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fivetran.com/v1/connections",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a connection"
+        },
+        {
+          "info": {
+            "name": "Retrieve a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a connection"
+        },
+        {
+          "info": {
+            "name": "Modify a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify a connection"
+        },
+        {
+          "info": {
+            "name": "Delete a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a connection"
+        },
+        {
+          "info": {
+            "name": "Trigger incremental sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId/sync",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger incremental sync"
+        },
+        {
+          "info": {
+            "name": "Trigger historical re-sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId/resync",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger historical re-sync"
+        },
+        {
+          "info": {
+            "name": "Run setup validation tests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId/test",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run setup validation tests"
+        },
+        {
+          "info": {
+            "name": "Retrieve sync state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId/state",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve sync state"
+        },
+        {
+          "info": {
+            "name": "Update sync state",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId/state",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update sync state"
+        },
+        {
+          "info": {
+            "name": "Generate a Connect Card URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.fivetran.com/v1/connections/:connectionId/connect-card",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a Connect Card URL"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
