@@ -25,6 +25,13 @@ tags:
 - Data Integration
 - Data Pipeline
 - ETL
+- Software-as-a-Service
+- Unified-API
+tags_raw:
+- Connectors
+- Data Integration
+- Data Pipeline
+- ETL
 - SaaS
 - Unified API
 url: https://raw.githubusercontent.com/api-evangelist/fivetran/refs/heads/main/apis.yml
@@ -43,6 +50,14 @@ apis:
   humanURL: https://fivetran.com/docs/rest-api
   baseURL: https://api.fivetran.com/v1
   tags:
+  - Connections
+  - Connectors
+  - Data Integration
+  - Destinations
+  - ETL
+  - Transformation
+  - Webhook
+  tags_raw:
   - Connections
   - Connectors
   - Data Integration
@@ -85,6 +100,8 @@ apis:
   humanURL: https://fivetran.com/docs/rest-api
   baseURL: https://api.fivetran.com/v1
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -115,6 +132,8 @@ apis:
   humanURL: https://fivetran.com/docs/rest-api
   baseURL: https://api.fivetran.com/v1
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
@@ -125,6 +144,8 @@ apis:
   humanURL: https://fivetran.com/docs/rest-api
   baseURL: https://api.fivetran.com/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -135,6 +156,8 @@ apis:
   humanURL: https://fivetran.com/docs/rest-api
   baseURL: https://api.fivetran.com/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
