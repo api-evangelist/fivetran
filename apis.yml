@@ -66,7 +66,7 @@ apis:
   - Data Integration
   - Destinations
   - ETL
-  - Transformations
+  - Transformation
   - Webhook
   tags_raw:
   - Connections
