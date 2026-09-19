@@ -65,7 +65,7 @@ apis:
   - Connections
   - Connectors
   - Data Integration
-  - Destinations
+  - Destination
   - ETL
   - Transformation
   - Webhook
@@ -102,6 +102,8 @@ apis:
   humanURL: https://fivetran.com/docs/rest-api
   baseURL: https://api.fivetran.com/v1
   tags:
+  - Destination
+  tags_raw:
   - Destinations
   properties:
   - type: OpenAPI
