@@ -38,7 +38,7 @@ tags:
 - Data Pipeline
 - ETL
 - Software-as-a-Service
-- Unified-API
+- Unified API
 tags_raw:
 - Connectors
 - Data Integration
@@ -46,6 +46,7 @@ tags_raw:
 - ETL
 - SaaS
 - Unified API
+- Unified-API
 url: https://raw.githubusercontent.com/api-evangelist/fivetran/refs/heads/main/apis.yml
 created: '2026-03-27'
 modified: '2026-05-19'
@@ -84,8 +85,6 @@ apis:
     url: https://fivetran.com/docs/rest-api/getting-started
   - type: Authentication
     url: https://fivetran.com/docs/rest-api/getting-started/system-keys
-  - url: graphql/fivetran-graphql.md
-    type: GraphQL
 - aid: fivetran:fivetran-connections-api
   name: Fivetran Connections API
   description: The Connections API from Fivetran — 7 operation(s) for connections.
