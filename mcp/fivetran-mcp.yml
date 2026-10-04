@@ -1,0 +1,201 @@
+generated: '2026-10-04'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/fivetran-connections-api-openapi.yml
+- openapi/fivetran-destinations-api-openapi.yml
+- openapi/fivetran-groups-api-openapi.yml
+- openapi/fivetran-metadata-api-openapi.yml
+- openapi/fivetran-roles-api-openapi.yml
+- openapi/fivetran-teams-api-openapi.yml
+- openapi/fivetran-users-api-openapi.yml
+- openapi/fivetran-webhooks-api-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: No MCP server was found. The pre-flight posted tools/list to /mcp on api.fivetran.com, fivetran.com, www.fivetran.com, get.fivetran.com;
+  verdict absent. Candidate tools below are derived from the 36 operation(s) in the provider's own OpenAPI (36 listed); they describe what a server
+  WOULD expose, not one that exists.
+tools:
+- name: list_connections
+  operationId: listConnections
+  method: GET
+  path: /connections
+  description: List connections
+- name: create_destination
+  operationId: createDestination
+  method: POST
+  path: /destinations
+  description: Create a destination
+- name: list_groups
+  operationId: listGroups
+  method: GET
+  path: /groups
+  description: List groups
+- name: list_connector_types
+  operationId: listConnectorTypes
+  method: GET
+  path: /metadata/connector-types
+  description: List supported connector types
+- name: list_roles
+  operationId: listRoles
+  method: GET
+  path: /roles
+  description: List roles
+- name: list_teams
+  operationId: listTeams
+  method: GET
+  path: /teams
+  description: List teams
+- name: list_users
+  operationId: listUsers
+  method: GET
+  path: /users
+  description: List users
+- name: list_webhooks
+  operationId: listWebhooks
+  method: GET
+  path: /webhooks
+  description: List webhooks
+- name: create_connection
+  operationId: createConnection
+  method: POST
+  path: /connections
+  description: Create a connection
+- name: get_destination
+  operationId: getDestination
+  method: GET
+  path: /destinations/{destinationId}
+  description: Retrieve a destination
+- name: create_group
+  operationId: createGroup
+  method: POST
+  path: /groups
+  description: Create a group
+- name: create_team
+  operationId: createTeam
+  method: POST
+  path: /teams
+  description: Create a team
+- name: invite_user
+  operationId: inviteUser
+  method: POST
+  path: /users
+  description: Invite a user
+- name: create_account_webhook
+  operationId: createAccountWebhook
+  method: POST
+  path: /webhooks/account
+  description: Create an account-level webhook
+- name: get_connection
+  operationId: getConnection
+  method: GET
+  path: /connections/{connectionId}
+  description: Retrieve a connection
+- name: update_destination
+  operationId: updateDestination
+  method: PATCH
+  path: /destinations/{destinationId}
+  description: Modify a destination
+- name: get_group
+  operationId: getGroup
+  method: GET
+  path: /groups/{groupId}
+  description: Retrieve a group
+- name: get_user
+  operationId: getUser
+  method: GET
+  path: /users/{userId}
+  description: Retrieve a user
+- name: create_group_webhook
+  operationId: createGroupWebhook
+  method: POST
+  path: /webhooks/group/{groupId}
+  description: Create a group-level webhook
+- name: update_connection
+  operationId: updateConnection
+  method: PATCH
+  path: /connections/{connectionId}
+  description: Modify a connection
+- name: delete_destination
+  operationId: deleteDestination
+  method: DELETE
+  path: /destinations/{destinationId}
+  description: Delete a destination
+- name: update_group
+  operationId: updateGroup
+  method: PATCH
+  path: /groups/{groupId}
+  description: Modify a group
+- name: update_user
+  operationId: updateUser
+  method: PATCH
+  path: /users/{userId}
+  description: Update a user
+- name: get_webhook
+  operationId: getWebhook
+  method: GET
+  path: /webhooks/{webhookId}
+  description: Retrieve a webhook
+- name: delete_connection
+  operationId: deleteConnection
+  method: DELETE
+  path: /connections/{connectionId}
+  description: Delete a connection
+- name: delete_group
+  operationId: deleteGroup
+  method: DELETE
+  path: /groups/{groupId}
+  description: Delete a group
+- name: delete_user
+  operationId: deleteUser
+  method: DELETE
+  path: /users/{userId}
+  description: Delete a user
+- name: update_webhook
+  operationId: updateWebhook
+  method: PATCH
+  path: /webhooks/{webhookId}
+  description: Update a webhook
+- name: sync_connection
+  operationId: syncConnection
+  method: POST
+  path: /connections/{connectionId}/sync
+  description: Trigger incremental sync
+- name: delete_webhook
+  operationId: deleteWebhook
+  method: DELETE
+  path: /webhooks/{webhookId}
+  description: Delete a webhook
+- name: resync_connection
+  operationId: resyncConnection
+  method: POST
+  path: /connections/{connectionId}/resync
+  description: Trigger historical re-sync
+- name: test_webhook
+  operationId: testWebhook
+  method: POST
+  path: /webhooks/{webhookId}/test
+  description: Test a webhook delivery
+- name: test_connection
+  operationId: testConnection
+  method: POST
+  path: /connections/{connectionId}/test
+  description: Run setup validation tests
+- name: get_connection_state
+  operationId: getConnectionState
+  method: GET
+  path: /connections/{connectionId}/state
+  description: Retrieve sync state
+- name: update_connection_state
+  operationId: updateConnectionState
+  method: PATCH
+  path: /connections/{connectionId}/state
+  description: Update sync state
+- name: create_connect_card
+  operationId: createConnectCard
+  method: POST
+  path: /connections/{connectionId}/connect-card
+  description: Generate a Connect Card URL

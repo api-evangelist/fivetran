@@ -1,0 +1,189 @@
+generated: '2026-10-04'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 13
+  own: 11
+  other_domain: 0
+  platform: 2
+  roles:
+  - api
+  - docs
+  - other
+  - partner
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: api.fivetran.com
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: fivetran.com
+  role: api
+  relation: own
+- host: docs.fivetran.com
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  types: []
+  serves: []
+  title: Fivetran Documentation | Setup Guides for Data Pipelines
+  status: 200
+  registrable_domain: fivetran.com
+  role: docs
+  relation: own
+- host: fivetran.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - TermsOfService
+  - Login
+  - ChangeLog
+  - APIReference
+  - GettingStarted
+  - Documentation
+  - REST API Documentation
+  - LlmsText
+  serves:
+  - docs
+  registrable_domain: fivetran.com
+  role: docs
+  relation: own
+- host: get.fivetran.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: fivetran.com
+  role: other
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  - MCPServer
+  - AgentSkills
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: go.fivetran.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: fivetran.com
+  role: other
+  relation: own
+- host: learn.fivetran.com
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: fivetran.com
+  role: other
+  relation: own
+- host: partners.fivetran.com
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  - well-known
+  types: []
+  serves: []
+  title: Find the right Fivetran Expert
+  status: 200
+  registrable_domain: fivetran.com
+  role: partner
+  relation: own
+- host: status.fivetran.com
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: fivetran.com
+  role: status
+  relation: own
+- host: support.fivetran.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  types:
+  - Support
+  serves: []
+  registrable_domain: fivetran.com
+  role: support
+  relation: own
+- host: trust.fivetran.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - Compliance
+  serves: []
+  platform: app.safebase.io
+  registrable_domain: fivetran.com
+  role: other
+  relation: own
+- host: www.fivetran.com
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Security
+  - PrivacyPolicy
+  - Pricing
+  - Newsroom
+  - DeveloperPortal
+  - Website
+  - Integrations
+  - Blog
+  serves:
+  - docs
+  - cdn
+  vendor: cloudflare
+  registrable_domain: fivetran.com
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

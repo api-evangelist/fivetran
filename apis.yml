@@ -1,11 +1,15 @@
 aid: fivetran
+
 name: Fivetran
+
 description: Fivetran is an automated data integration platform providing pre-built
   connectors for syncing data from SaaS applications, databases, and APIs into cloud
   data warehouses. The Fivetran REST API exposes management of users, groups, teams,
   roles, destinations, connections, transformations, webhooks, certificates, and connector
   metadata.
+
 type: Index
+
 deliveryModel:
   model: unknown
   open_source: false
@@ -17,6 +21,7 @@ deliveryModel:
   - openapi
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -31,7 +36,9 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fivetran.png
+
 tags:
 - Connectors
 - Data Integration
@@ -39,6 +46,7 @@ tags:
 - ETL
 - Software-as-a-Service
 - Unified API
+
 tags_raw:
 - Connectors
 - Data Integration
@@ -47,10 +55,120 @@ tags_raw:
 - SaaS
 - Unified API
 - Unified-API
+
 url: https://raw.githubusercontent.com/api-evangelist/fivetran/refs/heads/main/apis.yml
+
 created: '2026-03-27'
+
 modified: '2026-05-19'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: FinOps
+  url: finops/fivetran-finops.yml
+- type: RateLimits
+  url: rate-limits/fivetran-rate-limits.yml
+- type: Plans
+  url: plans/fivetran-plans-pricing.yml
+- type: Spectral
+  url: rules/fivetran-rules.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: ChangeLog
+  url: changelog/fivetran-changelog.yml
+- type: Compliance
+  url: https://trust.fivetran.com/
+- type: Conformance
+  url: conformance/fivetran-conformance.yml
+- type: LLMsTxt
+  url: llms/fivetran-llms.txt
+- type: SecurityTxt
+  url: well-known/fivetran-learn-security.txt
+- type: WellKnown
+  url: well-known/fivetran-well-known.yml
+- type: Hosts
+  url: hosts/fivetran-hosts.yml
+- type: Vendors
+  url: vendors/fivetran-vendors.yml
+- type: TermsOfService
+  url: https://fivetran.com/legal/terms
+- type: Support
+  url: https://support.fivetran.com/hc/en-us
+- type: Security
+  url: https://www.fivetran.com/security
+- type: PrivacyPolicy
+  url: https://www.fivetran.com/legal/privacy
+- type: Pricing
+  url: https://www.fivetran.com/pricing
+- type: Newsroom
+  url: https://www.fivetran.com/news
+- type: Login
+  url: https://fivetran.com/login
+- type: DeveloperPortal
+  url: https://www.fivetran.com/developers
+- type: ChangeLog
+  url: https://fivetran.com/rss/changelog
+- type: APIReference
+  url: https://fivetran.com/docs/rest-api/api-reference
+- type: GettingStarted
+  url: https://fivetran.com/docs/getting-started
+- type: AgenticAccess
+  url: agentic-access/fivetran-agentic-access.yml
+- type: TrustCenter
+  url: security/fivetran-trust-center.yml
+- type: DomainSecurity
+  url: security/fivetran-domain-security.yml
+- type: Authentication
+  url: authentication/fivetran-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/fivetran
+- type: Website
+  url: https://www.fivetran.com/
+- type: Documentation
+  url: https://fivetran.com/docs
+- type: REST API Documentation
+  url: https://fivetran.com/docs/rest-api
+- type: GitHubOrganization
+  url: https://github.com/fivetran
+- type: Features
+  data:
+  - 'Free: low-volume usage included'
+  - 'Paid Connections: $5 base for 1M MAR, tiered declining above'
+  - 'Transformations: free under 5K runs, $0.01 above, declining at scale'
+  - 'Enterprise: PrivateLink, Hybrid, HIPAA, BAA, audit logs'
+  - Annual contracts save up to 22%
+  - 500+ pre-built connectors (SaaS, DBs, files, events)
+  - 'Destinations: Snowflake, BigQuery, Redshift, Databricks, Postgres, etc.'
+  - 'Management API: 600 req/min/account'
+  - Sync frequency from 24/day (Free) to 1-minute (Paid)
+  - dbt Core integration for transformations
+  - Quickstart Data Models
+  - Custom connectors via Connector SDK
+  - Webhooks for sync events
+  - OAuth 2.0 + service accounts
+  - PrivateLink, Hybrid Deployment (Enterprise)
+  - Customer-managed encryption keys (Enterprise)
+  sources:
+  - https://www.fivetran.com/pricing
+  updated: '2026-05-04'
+- type: Integrations
+  url: https://www.fivetran.com/connectors
+- name: MCP Server
+  url: https://github.com/fivetran/fivetran-mcp
+  type: MCPServer
+- name: Agent Skills
+  url: https://github.com/fivetran/claude-sap-skills
+  type: AgentSkills
+- type: LlmsText
+  url: https://fivetran.com/llms.txt
+- url: https://www.fivetran.com/blog/rss.xml
+  type: Blog
+
 apis:
 - aid: fivetran:fivetran-rest-api
   name: Fivetran REST API
@@ -175,58 +293,7 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/fivetran-webhooks-api-openapi.yml
-common:
-- type: AgenticAccess
-  url: agentic-access/fivetran-agentic-access.yml
-- type: TrustCenter
-  url: security/fivetran-trust-center.yml
-- type: DomainSecurity
-  url: security/fivetran-domain-security.yml
-- type: Authentication
-  url: authentication/fivetran-authentication.yml
-- type: LinkedIn
-  url: https://www.linkedin.com/company/fivetran
-- type: Website
-  url: https://www.fivetran.com/
-- type: Documentation
-  url: https://fivetran.com/docs
-- type: REST API Documentation
-  url: https://fivetran.com/docs/rest-api
-- type: GitHubOrganization
-  url: https://github.com/fivetran
-- type: Features
-  data:
-  - 'Free: low-volume usage included'
-  - 'Paid Connections: $5 base for 1M MAR, tiered declining above'
-  - 'Transformations: free under 5K runs, $0.01 above, declining at scale'
-  - 'Enterprise: PrivateLink, Hybrid, HIPAA, BAA, audit logs'
-  - Annual contracts save up to 22%
-  - 500+ pre-built connectors (SaaS, DBs, files, events)
-  - 'Destinations: Snowflake, BigQuery, Redshift, Databricks, Postgres, etc.'
-  - 'Management API: 600 req/min/account'
-  - Sync frequency from 24/day (Free) to 1-minute (Paid)
-  - dbt Core integration for transformations
-  - Quickstart Data Models
-  - Custom connectors via Connector SDK
-  - Webhooks for sync events
-  - OAuth 2.0 + service accounts
-  - PrivateLink, Hybrid Deployment (Enterprise)
-  - Customer-managed encryption keys (Enterprise)
-  sources:
-  - https://www.fivetran.com/pricing
-  updated: '2026-05-04'
-- type: Integrations
-  url: https://www.fivetran.com/connectors
-- name: MCP Server
-  url: https://github.com/fivetran/fivetran-mcp
-  type: MCPServer
-- name: Agent Skills
-  url: https://github.com/fivetran/claude-sap-skills
-  type: AgentSkills
-- type: LlmsText
-  url: https://fivetran.com/llms.txt
-- url: https://www.fivetran.com/blog/rss.xml
-  type: Blog
+
 integrations:
 - name: Fivetran blue
 - name: Fivetran white
@@ -234,6 +301,9 @@ integrations:
 - name: LinkedIn
 - name: x.com
 - name: Youtube
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-10-04'
+  status: enriched
+  artifacts_added: 19
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

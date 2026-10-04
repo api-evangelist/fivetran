@@ -1,0 +1,25 @@
+generated: '2026-10-04'
+method: searched
+source: https://trust.fivetran.com/
+signals:
+  - name: data_residency
+    evidence:
+      source: https://trust.fivetran.com/
+      http_status: 200
+      fetched: true
+      quote: "We are committed to providing robust security and privacy programs that protect your data as we would our own."
+      note: Indicates commitment to data protection and residency.
+  - name: incident_notification
+    evidence:
+      source: https://trust.fivetran.com/
+      http_status: 200
+      fetched: true
+      quote: "Our Trust Center is at the core of our many transparency efforts, and we hope you will find accessing our comprehensive security, privacy, and compliance documentation as easy as setting up your first Fivetran pipeline."
+      note: Shows transparency and likely incident reporting.
+  - name: global_privacy_control
+    evidence:
+      source: https://trust.fivetran.com/
+      http_status: 200
+      fetched: true
+      quote: "Compliance CCPA Cyber Essentials GDPR HITRUST ISO/IEC 27001:2022 ISO/IEC 27701:2019 SOC 1 SOC 2 VPAT PCI DSS v4.0.1"
+      note: Lists GDPR and other privacy frameworks.

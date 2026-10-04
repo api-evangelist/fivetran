@@ -1,0 +1,57 @@
+generated: '2026-10-04'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://fivetran.com/docs/getting-started/fivetran-dashboard/account-settings/scim/okta-scim/new-app-migration.md
+sources:
+- https://fivetran.com/docs/getting-started/fivetran-dashboard/account-settings/scim/okta-scim/new-app-migration.md
+- https://fivetran.com/docs/connectors/applications/15five/changelog.md
+- https://fivetran.com/docs/connectors/applications/360learning/changelog.md
+- https://fivetran.com/docs/connectors/applications/7shifts/changelog.md
+entries:
+- breaking: false
+  highlights:
+  - Effective June 3, 2026 we use a new June 2026 schema.
+  - We are updating the connector schema to support a feature enhancement.
+  date: '2026-06-01'
+- breaking: false
+  highlights:
+  - Due to 360Learning’s deprecation of API v1, we have removed API key authentication and updated this connector to support only OAuth 2.0.
+  - If you have an existing connection that uses an API key, you must reconfigure it to use OAuth 2.0.
+  date: '2026-06-01'
+- breaking: false
+  highlights:
+  - We have added a new authentication method for our 360Learning connector.
+  - You can now use OAuth authentication to connect your 360Learning account with Fivetran.
+  date: '2025-11-01'
+- breaking: false
+  highlights:
+  - Effective May 28, 2024 we use a new May 2024 schema.
+  - We are updating the connector schema to align with source changes.
+  date: '2024-05-01'
+- breaking: false
+  highlights:
+  - We have added a new column, `question_text`, to the `CHECK_IN_ANSWER` table.
+  - We have removed the `CHECK_IN_PULSE` and `CHECK_IN_QUESTION` tables.
+  date: '2024-02-01'
+- breaking: false
+  highlights:
+  - 'Lite connectors are now available for the following sources:'
+  - '- 15Five'
+  - '- Appcues'
+  - '- Awin'
+  date: '2023-10-01'
+- breaking: false
+  highlights:
+  - We have changed our connection re-sync strategy.
+  - During a re-import, we no longer delete historical records for tables with a retention period at the source.
+  date: '2025-09-01'
+- breaking: false
+  highlights:
+  - 'Lite connectors are now available for the following sources:'
+  - '- 360Learning'
+  - '- Alchemer'
+  - '- Chameleon'
+  date: '2023-04-01'
+note: Versioning scheme and current version are not specified on the provided pages; fields are left null. 4 extracted row(s) were dropped because
+  their quote was not on the page.
+docs: https://fivetran.com/docs/getting-started/fivetran-dashboard/account-settings/scim/okta-scim/new-app-migration.md

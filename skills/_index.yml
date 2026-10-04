@@ -1,0 +1,31 @@
+generated: '2026-10-04'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/fivetran-connections-api-openapi.yml
+skills:
+- file: skills/fivetran-create-and-sync-connection.md
+  name: fivetran-create-and-sync-connection
+  api: openapi/fivetran-connections-api-openapi.yml
+  operations:
+  - createConnection
+  - syncConnection
+- file: skills/fivetran-create-and-test-webhook.md
+  name: fivetran-create-and-test-webhook
+  api: openapi/fivetran-webhooks-api-openapi.yml
+  operations:
+  - createAccountWebhook
+  - testWebhook
+- file: skills/fivetran-manage-destination.md
+  name: fivetran-manage-destination
+  api: openapi/fivetran-destinations-api-openapi.yml
+  operations:
+  - createDestination
+  - getDestination
+  - updateDestination
+  - deleteDestination
+- file: skills/fivetran-create-retrieve-group.md
+  name: fivetran-create-retrieve-group
+  api: openapi/fivetran-groups-api-openapi.yml
+  operations:
+  - createGroup
+  - getGroup
