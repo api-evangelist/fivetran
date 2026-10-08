@@ -176,6 +176,12 @@ apis:
   - type: OpenAPI
     url: openapi/fivetran-webhooks-api-openapi.yml
 common:
+- type: Plans
+  url: plans/fivetran-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/fivetran-rate-limits.yml
+- type: FinOps
+  url: finops/fivetran-finops.yml
 - type: AgenticAccess
   url: agentic-access/fivetran-agentic-access.yml
 - type: TrustCenter
