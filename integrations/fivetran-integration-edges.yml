@@ -6,6 +6,7 @@ checked:
 - https://azuremarketplace.microsoft.com/
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
+- zoom/integrations/zoom-integration-edges.yml
 marketplace_apps:
 - marketplace: coverage
   channel: provider-built
@@ -12146,5 +12147,22 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: dbt package
+- partner_name: Zoom (own)
+  partner: zoom
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.zoom.us/apps/eZDyfmq6Ts-0JHafoED4TQ
+  mirror_of: zoom/integrations/zoom-integration-edges.yml
+  apps:
+  - Fivetran Integration
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Zoom app
 source:
 - greenhouse/integrations/greenhouse-integration-edges.yml
