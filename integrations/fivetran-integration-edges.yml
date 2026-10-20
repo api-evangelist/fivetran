@@ -6,6 +6,7 @@ checked:
 - https://azuremarketplace.microsoft.com/
 - https://fivetran.com/docs-sitemap.xml
 - https://fivetran.com/docs/connectors/partner-built-program
+- zendesk/integrations/zendesk-integration-edges.yml
 - zoom/integrations/zoom-integration-edges.yml
 marketplace_apps:
 - marketplace: coverage
@@ -35,22 +36,6 @@ edges:
   seller_name: Fivetran
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
-- partner_name: Greenhouse (own)
-  partner: greenhouse
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://integrations.greenhouse.com/partners/fivetran
-  mirror_of: greenhouse/integrations/greenhouse-integration-edges.yml
-  apps:
-  - Fivetran
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
 - partner_name: 15Five
   partner: 15five
   partner_match: domain
@@ -12147,6 +12132,39 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: dbt package
+- partner_name: Greenhouse (own)
+  partner: greenhouse
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://integrations.greenhouse.com/partners/fivetran
+  mirror_of: greenhouse/integrations/greenhouse-integration-edges.yml
+  apps:
+  - Fivetran
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+- partner_name: Zendesk (own)
+  partner: zendesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.zendesk.com/marketplace/apps/support/227178/fivetran/
+  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
+  apps:
+  - Fivetran
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Reporting and Analytics
 - partner_name: Zoom (own)
   partner: zoom
   partner_match: mirror
