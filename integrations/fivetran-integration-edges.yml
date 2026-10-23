@@ -30,6 +30,7 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- intercom/integrations/intercom-integration-edges.yml
 marketplace_apps:
 - marketplace: coverage
   channel: provider-built
@@ -12226,6 +12227,35 @@ edges:
     status: Active
   detected_by: sweep-accelerator-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Andreessen Horowitz (a16z)
+  partner: a16z
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://a16z.com/companies/fivetran/
+  category: vc portfolio participation
+  contract_reference:
+    register: a16z portfolio (a16z.com/portfolio/, the page's own data-companies JSON)
+    standard: null
+    spec_file: null
+    role: vc-portfolio-company
+    registered_name: Fivetran
+    register_id: https://a16z.com/companies/fivetran/
+    register_country: null
+    register_website: https://fivetran.com
+    matched_domain: fivetran.com
+    matched_by: domain
+    signal_note: 'participation only: the venture firm''s own published portfolio lists the company (investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-vc-portfolios.py
+    detected: '2026-10-21'
+    year: '2019'
+    status: Active
+    sector: Cultural Leadership Fund;Enterprise;Growth;Infra
+  detected_by: sweep-vc-portfolios.py
+  first_seen: '2026-10-21'
 - partner_name: dbt (dbt-package-hub)
   partner: dbt
   partner_match: mirror
@@ -12351,34 +12381,23 @@ edges:
   badges:
   - Verified publisher (Terraform partner tier)
   - Verified publisher (GitHub domain-verified organization)
-- partner_name: Andreessen Horowitz (a16z)
-  partner: a16z
-  partner_match: register
-  type: register
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://a16z.com/companies/fivetran/
-  category: vc portfolio participation
-  contract_reference:
-    register: a16z portfolio (a16z.com/portfolio/, the page's own data-companies JSON)
-    standard: null
-    spec_file: null
-    role: vc-portfolio-company
-    registered_name: Fivetran
-    register_id: https://a16z.com/companies/fivetran/
-    register_country: null
-    register_website: https://fivetran.com
-    matched_domain: fivetran.com
-    matched_by: domain
-    signal_note: 'participation only: the venture firm''s own published portfolio lists the company (investment);
-      an ownership and participation record, not conformance or certification'
-    detected_by: sweep-vc-portfolios.py
-    detected: '2026-10-21'
-    year: '2019'
-    status: Active
-    sector: Cultural Leadership Fund;Enterprise;Growth;Infra
-  detected_by: sweep-vc-portfolios.py
-  first_seen: '2026-10-21'
+- partner_name: Intercom (own)
+  partner: intercom
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.intercom.com/app-store/?app_package_code=fivetran-6z0a
+  mirror_of: intercom/integrations/intercom-integration-edges.yml
+  apps:
+  - Fivetran
+  - Fivetran Second App
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Automation platforms
 source:
 - greenhouse/integrations/greenhouse-integration-edges.yml
