@@ -1,4 +1,4 @@
-# Fivetran (fivetran)
+# Fivetran
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,67 +66,151 @@
 
 Fivetran is an automated data integration platform providing pre-built connectors for syncing data from SaaS applications, databases, and APIs into cloud data warehouses. The Fivetran REST API exposes management of users, groups, teams, roles, destinations, connections, transformations, webhooks, certificates, and connector metadata.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/fivetran/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/fivetran/refs/heads/main/apis.yml)
+**Areas:** Connectors · Data Integration · Data Pipeline · ETL · Software-as-a-Service · Unified API
 
-## Scope
+## Fivetran on APIs.io
 
-- **Type:** Index
+Everything profiled for Fivetran is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fivetran/](https://apis.io/providers/fivetran/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (9)
 
-- Connectors
-- Data Integration
-- Data Pipeline
-- ETL
-- SaaS
-- Unified API
+- [Fivetran REST API](https://apis.io/apis/fivetran/fivetran-rest-api/) — The Fivetran REST API allows programmatic management of all platform resources including users, roles, teams, groups, destinations, connections, webhooks,…
+- [Fivetran Connections API](https://apis.io/apis/fivetran/fivetran-connections-api/) — The Connections API from Fivetran — 7 operation(s) for connections.
+- [Fivetran Destinations API](https://apis.io/apis/fivetran/fivetran-destinations-api/) — The Destinations API from Fivetran — 2 operation(s) for destinations.
+- [Fivetran Groups API](https://apis.io/apis/fivetran/fivetran-groups-api/) — The Groups API from Fivetran — 2 operation(s) for groups.
+- [Fivetran Metadata API](https://apis.io/apis/fivetran/fivetran-metadata-api/) — The Metadata API from Fivetran — 1 operation(s) for metadata.
+- [Fivetran Roles API](https://apis.io/apis/fivetran/fivetran-roles-api/) — The Roles API from Fivetran — 1 operation(s) for roles.
+- [Fivetran Teams API](https://apis.io/apis/fivetran/fivetran-teams-api/) — The Teams API from Fivetran — 1 operation(s) for teams.
+- [Fivetran Users API](https://apis.io/apis/fivetran/fivetran-users-api/) — The Users API from Fivetran — 2 operation(s) for users.
+- [Fivetran Webhooks API](https://apis.io/apis/fivetran/fivetran-webhooks-api/) — The Webhooks API from Fivetran — 5 operation(s) for webhooks.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-27
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### Fivetran REST API
+GraphQL schemas.
 
-The Fivetran REST API allows programmatic management of all platform resources including users, roles, teams, groups, destinations, connections, webhooks, transformations, transformation projects, certificates, system keys, hybrid deployment agents, log services, private links, proxy agents, and connector metadata. Authentication is performed using a system key.
+- [Moved to /providers/fivetran/](https://apis.io/graphqls/fivetran/fivetran-graphql/)
 
-- **Human URL:** [https://fivetran.com/docs/rest-api](https://fivetran.com/docs/rest-api)
-- **Base URL:** `https://api.fivetran.com/v1`
+#### MCP servers (2)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Connections
-- Connectors
-- Data Integration
-- Destinations
-- ETL
-- Transformations
-- Webhooks
+- [fivetran-mcp.yml](https://apis.io/servers/fivetran/fivetran-mcp-yml/)
+- [MCP Server](https://apis.io/servers/fivetran/mcp-server/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://fivetran.com/docs/rest-api)
-- [Getting Started](https://fivetran.com/docs/rest-api/getting-started)
-- [Authentication](https://fivetran.com/docs/rest-api/getting-started/system-keys)
-- [Postman Collection](collections/fivetran.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/fivetran.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common Properties
+- [Fivetran Agentic Access](https://apis.io/agentic-access/fivetran/fivetran-agentic-access/)
 
-- [LinkedIn](https://www.linkedin.com/company/fivetran)
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Fivetran REST API](https://apis.io/collections/fivetran/open-fivetran/)
+- [Fivetran REST Connections API](https://apis.io/collections/fivetran/open-fivetran-connections-api/)
+- [Fivetran REST Connections Destinations API](https://apis.io/collections/fivetran/open-fivetran-destinations-api/)
+- [Fivetran REST Connections Groups API](https://apis.io/collections/fivetran/open-fivetran-groups-api/)
+- [Fivetran REST Connections Metadata API](https://apis.io/collections/fivetran/open-fivetran-metadata-api/)
+- [Fivetran REST Connections Roles API](https://apis.io/collections/fivetran/open-fivetran-roles-api/)
+- [Fivetran REST Connections Teams API](https://apis.io/collections/fivetran/open-fivetran-teams-api/)
+- [Fivetran REST Connections Users API](https://apis.io/collections/fivetran/open-fivetran-users-api/)
+- [Fivetran REST Connections Webhooks API](https://apis.io/collections/fivetran/open-fivetran-webhooks-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Fivetran API Rules](https://apis.io/rules/fivetran/fivetran-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Fivetran Authentication](https://apis.io/security/fivetran/fivetran-authentication/)
+- [Fivetran Domain Security](https://apis.io/security/fivetran/fivetran-domain-security/)
+- [Fivetran Trust Center](https://apis.io/security/fivetran/fivetran-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Fivetran Plans Pricing](https://apis.io/plans/fivetran/fivetran-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Fivetran Rate Limits](https://apis.io/rate-limits/fivetran/fivetran-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Fivetran Finops](https://apis.io/finops/fivetran/fivetran-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.fivetran.com/)
 - [Documentation](https://fivetran.com/docs)
-- [R E S T  A P I  Documentation](https://fivetran.com/docs/rest-api)
-- [GitHub Organization](https://github.com/fivetran)
-- [Features](undefined)
-- [Integrations](https://www.fivetran.com/connectors)
-- [M C P Server](https://github.com/fivetran/fivetran-mcp)
-- [Agent Skill](https://github.com/fivetran/claude-sap-skills)
-- [L L Ms Txt](https://fivetran.com/llms.txt)
+- [Blog](https://www.fivetran.com/blog/rss.xml)
+- [GitHub](https://github.com/fivetran)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 33.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 48.7 |
+| Contract governance | 18.2 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 37.5 |
+| Access clarity | 15.8 |
+
+**Agent readiness 35.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fivetran/](https://apis.io/providers/fivetran/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Fivetran: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fivetran/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
